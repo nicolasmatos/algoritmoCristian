@@ -32,8 +32,8 @@ public class Servidor extends Thread {
 
                 //Receber mensagem de clientes
                 DataInputStream in = new DataInputStream(server.getInputStream());
-                tempoRecv = System.currentTimeMillis();
                 System.out.println(in.readUTF());
+                tempoRecv = System.currentTimeMillis();
 
                 //Enviar mensagem de volta aos clientes
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());

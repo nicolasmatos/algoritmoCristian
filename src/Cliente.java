@@ -29,7 +29,7 @@ public class Cliente {
         this.temporizador = new Timer();
         try {
             //Caminho onde será salvo o arquivo com os tempos dos clientes
-            this.pr = new PrintWriter("C:\\Dev\\Ideia\\algoritmoCristian\\ClientTest.txt", "UTF-8");
+            this.pr = new PrintWriter("C:\\Dev\\Ideia\\algoritmoCristian\\LogClientes.txt", "UTF-8");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -50,9 +50,9 @@ public class Cliente {
                     System.out.println("Conectado a " + cliente.getRemoteSocketAddress());
 
                     //Envia mensagem para o servidor
+                    t0 = System.currentTimeMillis();
                     OutputStream outToServer = cliente.getOutputStream();
                     DataOutputStream out = new DataOutputStream(outToServer);
-                    t0 = System.currentTimeMillis();
                     out.writeUTF("Solicito a hora" + cliente.getLocalSocketAddress());
 
                     //Recebe mensagem do servidor

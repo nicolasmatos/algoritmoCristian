@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AlgoritmoCristian">
+    <output-path>$PROJECT_DIR$/classes/artifacts/AlgoritmoCristian</output-path>
+    <root id="archive" name="AlgoritmoCristian.jar" />
+  </artifact>
+</component>

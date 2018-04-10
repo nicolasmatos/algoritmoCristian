@@ -1,0 +1,40 @@
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:59:45.522
+Tempo recebimento Servidor: 10/04/2018 14:59:45.522
+Tempo envio Servidor: 10/04/2018 14:59:47.025
+Tempo recebimento Cliente: 10/04/2018 14:59:47.526
+
+Tempo marcado no servidor: 10/04/2018 14:59:45.525
+Tempo Algoritmo de Cristian: 10/04/2018 14:59:46.777
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:59:51.515
+Tempo recebimento Servidor: 10/04/2018 14:59:51.515
+Tempo envio Servidor: 10/04/2018 14:59:53.015
+Tempo recebimento Cliente: 10/04/2018 14:59:53.515
+
+Tempo marcado no servidor: 10/04/2018 14:59:51.515
+Tempo Algoritmo de Cristian: 10/04/2018 14:59:52.765
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:59:57.515
+Tempo recebimento Servidor: 10/04/2018 14:59:57.515
+Tempo envio Servidor: 10/04/2018 14:59:59.015
+Tempo recebimento Cliente: 10/04/2018 14:59:59.515
+
+Tempo marcado no servidor: 10/04/2018 14:59:57.515
+Tempo Algoritmo de Cristian: 10/04/2018 14:59:58.765
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 15:00:03.515
+Tempo recebimento Servidor: 10/04/2018 15:00:03.515
+Tempo envio Servidor: 10/04/2018 15:00:05.015
+Tempo recebimento Cliente: 10/04/2018 15:00:05.515
+
+Tempo marcado no servidor: 10/04/2018 15:00:03.515
+Tempo Algoritmo de Cristian: 10/04/2018 15:00:04.765
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 15:00:09.516
+Tempo recebimento Servidor: 10/04/2018 15:00:09.516
+Tempo envio Servidor: 10/04/2018 15:00:11.016
+Tempo recebimento Cliente: 10/04/2018 15:00:11.528
+
+Tempo marcado no servidor: 10/04/2018 15:00:09.516
+Tempo Algoritmo de Cristian: 10/04/2018 15:00:10.778
