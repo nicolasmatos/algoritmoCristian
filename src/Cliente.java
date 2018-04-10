@@ -53,12 +53,13 @@ public class Cliente {
                     OutputStream outToServer = cliente.getOutputStream();
                     DataOutputStream out = new DataOutputStream(outToServer);
                     t0 = System.currentTimeMillis();
-                    out.writeUTF("Olá de " + cliente.getLocalSocketAddress());
+                    out.writeUTF("Solicito a hora" + cliente.getLocalSocketAddress());
 
                     //Recebe mensagem do servidor
                     InputStream inFromServer = cliente.getInputStream();
                     DataInputStream in = new DataInputStream(inFromServer);
-                    long t1 = in.readLong();   //Recebe o tempo total no servidor
+                    long t1 = in.readLong();   //Recebe o quando o servidor recebeu a mensagem
+                    long ts = in.readLong();   //Recebe o tempo do servidor
                     long t2 = in.readLong();   //Recebe o tempo de envio no servidor
                     t3 = System.currentTimeMillis();
 
@@ -68,63 +69,44 @@ public class Cliente {
                     count ++;
 
                     //Definir tempos de atraso para simular os atrasos de solicitação / resposta
-                    t1 += 100;
-                    t2 += 150;
-                    t3 += 250;
+                    //t1 += 500;
+                    //ts += 900;
+                    t2 += 1500; //Simulando um atraso na resposta do servidor
+                    t3 += 2000; //Simulando um atraso no recebimento da resposta do servidor para o cliente
 
-                    //Obtém o RTT (tempo de atraso de ida e volta)
-                    long rtt = (t3 - t0) - (t2 - t1);
+                    //Cálculo do algoitmo de Cristian
+                    long tiv = t3 - t0; //Tempo que levou no cliente, desde sua requisição ao servidor, até o recebimento da resposta do servidor
+                    long tm2 = t3 - t2; //Tempo que levou para mensagem de resposta do servidor, chegar no cliente
+                    long tm1 = t1 - t0; //Tempo que levou para mensagem de requisição do cliente, chegar no servidor
 
-                    pr.println("###########################################");
-                    pr.println("Tempo Cliente Envio: " + t0);
-                    pr.println("Tempo do Servidor Recebimento: " + t1);
-                    pr.println("Tempo do Servidor Envio: " + t2);
-                    pr.println("Tempo Cliente Recebimento: " + t3);
+                    //Formula do slide do algortimo de Cristian
+                    long tc = ts + ((tiv + tm2 - tm1)/2);
 
-                    pr.println("*** RTT ***");
-                    pr.println("a -> (t3 - t0) = " + (t3 - t0));
-                    pr.println("b -> (t2 - t1) = " + (t2 - t1));
+                    //Salvando os dados no arquivo
+                    pr.println("----------------------------------------------------");
+                    pr.println("Tempo envio Cliente: " + formataData(t0));
+                    pr.println("Tempo recebimento Servidor: " + formataData(t1));
+                    pr.println("Tempo envio Servidor: " + formataData(t2));
+                    pr.println("Tempo recebimento Cliente: " + formataData(t3));
 
-                    pr.println("*** RTT divido por 2 ***");
-                    pr.println("(a-b)/2 =  " + rtt / 2);
-
-                    //RTT Offset
-                    long theta = (t1 - t0) + (t2 - t3 ) / 2;
-                    pr.println("*** RTT Offset ***");
-                    pr.println("Theta -> (t1 - t0) + (t2 - t3 ) / 2 = " + theta);
-
-
-                    long cristianTime = t2 + (rtt / 2);
-                    long cristianTimeComOffset = t2 + (theta);
-                    pr.println("*** Horario de Cristian ***");
-                    pr.println("Horario de Cristian -> t2 + (rtt/2): " + cristianTime);
-                    pr.println("Horario de Cristian -> t2 + (rtt_offset): " + cristianTimeComOffset);
+                    pr.println("\nTempo marcado no servidor: " + formataData(ts));
+                    pr.println("Tempo Algoritmo de Cristian: " + formataData(tc));
 
                     //Imprimindo no console
-                    System.out.println("\nTempo Cliente Envio: " + formataData(t0));
-                    System.out.println("Tempo do Servidor Recebimento: " + formataData(t1));
-                    System.out.println("Tempo do Servidor Envio: " + formataData(t2));
-                    System.out.println("Tempo Cliente Recebimento: " + formataData(t3));
+                    System.out.println("\nTempo envio Cliente: " + formataData(t0));
+                    System.out.println("Tempo recebimento Servidor: " + formataData(t1));
+                    System.out.println("Tempo envio Servidor: " + formataData(t2));
+                    System.out.println("Tempo recebimento Cliente: " + formataData(t3));
 
-                    /*
-                    System.out.println("*** RTT ***");
-                    System.out.println("a -> (t3 - t0) = " + (t3 - t0));
-                    System.out.println("b -> (t2 - t1) = " + (t2 - t1));
+                    System.out.println("\nTempo marcado no servidor: " + formataData(ts));
+                    System.out.println("Tempo Algoritmo de Cristian: " + formataData(tc));
 
-                    System.out.println("*** RTT divido por 2 ***");
-                    System.out.println("(a-b)/2 =  " + rtt / 2);
-
-                    System.out.println("*** RTT Offset ***");
-                    System.out.println("Theta -> (t1 - t0) + (t2 - t3 ) / 2 = " + theta);
-
-                    System.out.println("*** Horario de Cristian ***");*/
-
-                    System.out.println("Horario de Cristian -> t2 + (rtt/2): " + formataData(cristianTime));
-                    System.out.println("Horario de Cristian -> t2 + (rtt_offset): " + formataData(cristianTimeComOffset));
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else {
+            }
+            else {
                 pr.close(); //Libera o arquivo
                 temporizador.cancel();
                 temporizador.purge();

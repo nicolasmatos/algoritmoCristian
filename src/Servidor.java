@@ -39,7 +39,9 @@ public class Servidor extends Thread {
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
                 long tempoServidor = System.currentTimeMillis();
                 tempoEnvio = System.currentTimeMillis();
-                out.writeLong(tempoServidor);  //Envia o tempo total no servidor de volta ao cliente
+
+                out.writeLong(tempoRecv);      //Envia o tempo quando recebeu a mensagem do cliente
+                out.writeLong(tempoServidor);  //Envia o tempo atual do servidor
                 out.writeLong(tempoEnvio);     //Envia o tempo de envio para o cliente
 
                 //Fecha a conexão

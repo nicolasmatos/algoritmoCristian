@@ -1,75 +1,40 @@
-###########################################
-Tempo Cliente Envio: 1523371186765
-Tempo do Servidor Recebimento: 1523371186865
-Tempo do Servidor Envio: 1523371186915
-Tempo Cliente Recebimento: 1523371187016
-*** RTT ***
-a -> (t3 - t0) = 251
-b -> (t2 - t1) = 50
-*** RTT divido por 2 ***
-(a-b)/2 =  100
-*** RTT Offset ***
-Theta -> (t1 - t0) + (t2 - t3 ) / 2 = 50
-*** Horario de Cristian ***
-Horario de Cristian -> t2 + (rtt/2): 1523371187015
-Horario de Cristian -> t2 + (rtt_offset): 1523371186965
-###########################################
-Tempo Cliente Envio: 1523371192761
-Tempo do Servidor Recebimento: 1523371192861
-Tempo do Servidor Envio: 1523371192911
-Tempo Cliente Recebimento: 1523371193011
-*** RTT ***
-a -> (t3 - t0) = 250
-b -> (t2 - t1) = 50
-*** RTT divido por 2 ***
-(a-b)/2 =  100
-*** RTT Offset ***
-Theta -> (t1 - t0) + (t2 - t3 ) / 2 = 50
-*** Horario de Cristian ***
-Horario de Cristian -> t2 + (rtt/2): 1523371193011
-Horario de Cristian -> t2 + (rtt_offset): 1523371192961
-###########################################
-Tempo Cliente Envio: 1523371198762
-Tempo do Servidor Recebimento: 1523371198862
-Tempo do Servidor Envio: 1523371198912
-Tempo Cliente Recebimento: 1523371199012
-*** RTT ***
-a -> (t3 - t0) = 250
-b -> (t2 - t1) = 50
-*** RTT divido por 2 ***
-(a-b)/2 =  100
-*** RTT Offset ***
-Theta -> (t1 - t0) + (t2 - t3 ) / 2 = 50
-*** Horario de Cristian ***
-Horario de Cristian -> t2 + (rtt/2): 1523371199012
-Horario de Cristian -> t2 + (rtt_offset): 1523371198962
-###########################################
-Tempo Cliente Envio: 1523371204761
-Tempo do Servidor Recebimento: 1523371204861
-Tempo do Servidor Envio: 1523371204911
-Tempo Cliente Recebimento: 1523371205011
-*** RTT ***
-a -> (t3 - t0) = 250
-b -> (t2 - t1) = 50
-*** RTT divido por 2 ***
-(a-b)/2 =  100
-*** RTT Offset ***
-Theta -> (t1 - t0) + (t2 - t3 ) / 2 = 50
-*** Horario de Cristian ***
-Horario de Cristian -> t2 + (rtt/2): 1523371205011
-Horario de Cristian -> t2 + (rtt_offset): 1523371204961
-###########################################
-Tempo Cliente Envio: 1523371210762
-Tempo do Servidor Recebimento: 1523371210862
-Tempo do Servidor Envio: 1523371210912
-Tempo Cliente Recebimento: 1523371211012
-*** RTT ***
-a -> (t3 - t0) = 250
-b -> (t2 - t1) = 50
-*** RTT divido por 2 ***
-(a-b)/2 =  100
-*** RTT Offset ***
-Theta -> (t1 - t0) + (t2 - t3 ) / 2 = 50
-*** Horario de Cristian ***
-Horario de Cristian -> t2 + (rtt/2): 1523371211012
-Horario de Cristian -> t2 + (rtt_offset): 1523371210962
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:17:53.151
+Tempo recebimento Servidor: 10/04/2018 14:17:53.151
+Tempo envio Servidor: 10/04/2018 14:17:54.651
+Tempo recebimento Cliente: 10/04/2018 14:17:55.152
+
+Tempo marcado no servidor: 10/04/2018 14:17:53.151
+Tempo Algoritmo de Cristian: 10/04/2018 14:17:54.402
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:17:59.147
+Tempo recebimento Servidor: 10/04/2018 14:17:59.147
+Tempo envio Servidor: 10/04/2018 14:18:00.647
+Tempo recebimento Cliente: 10/04/2018 14:18:01.147
+
+Tempo marcado no servidor: 10/04/2018 14:17:59.147
+Tempo Algoritmo de Cristian: 10/04/2018 14:18:00.397
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:18:05.147
+Tempo recebimento Servidor: 10/04/2018 14:18:05.147
+Tempo envio Servidor: 10/04/2018 14:18:06.647
+Tempo recebimento Cliente: 10/04/2018 14:18:07.147
+
+Tempo marcado no servidor: 10/04/2018 14:18:05.147
+Tempo Algoritmo de Cristian: 10/04/2018 14:18:06.397
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:18:11.148
+Tempo recebimento Servidor: 10/04/2018 14:18:11.148
+Tempo envio Servidor: 10/04/2018 14:18:12.648
+Tempo recebimento Cliente: 10/04/2018 14:18:13.148
+
+Tempo marcado no servidor: 10/04/2018 14:18:11.148
+Tempo Algoritmo de Cristian: 10/04/2018 14:18:12.398
+----------------------------------------------------
+Tempo envio Cliente: 10/04/2018 14:18:17.148
+Tempo recebimento Servidor: 10/04/2018 14:18:17.148
+Tempo envio Servidor: 10/04/2018 14:18:18.648
+Tempo recebimento Cliente: 10/04/2018 14:18:19.148
+
+Tempo marcado no servidor: 10/04/2018 14:18:17.148
+Tempo Algoritmo de Cristian: 10/04/2018 14:18:18.398
