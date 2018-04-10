@@ -1,5 +1,3 @@
-package client;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,25 +5,28 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ClientCristian {
+public class Cliente {
 
-    private String serverName;
-    private int serverPort;
+    private String nomeServidor;
+    private int portaServidor;
     private static int count;   //O número de conexões
-    private Timer timer;        //Este temporizador é para enviar o pedido ao servidor a cada 6 segundos
+    private Timer temporizador;        //Este temporizador é para enviar o pedido ao servidor a cada 6 segundos
     private PrintWriter pr;     //Para escrever em arquivo
     private long t0;            //O momento em que envia o pedido ao servidor
     private long t3;            //O momento em que recebe a resposta do servidor
 
-    // Constructor
-    public ClientCristian(String serverName, int serverPort) {
-        this.serverName = serverName;
-        this.serverPort = serverPort;
-        ClientCristian.count = 0;
-        this.timer = new Timer();
+    //Construtor
+    public Cliente(String nomeServidor, int portaServidor) {
+        this.nomeServidor = nomeServidor;
+        this.portaServidor = portaServidor;
+        Cliente.count = 0;
+        this.temporizador = new Timer();
         try {
             //Caminho onde será salvo o arquivo com os tempos dos clientes
             this.pr = new PrintWriter("C:\\Dev\\Ideia\\algoritmoCristian\\ClientTest.txt", "UTF-8");
@@ -41,27 +42,28 @@ public class ClientCristian {
             //Número de cliente que vão fazer a sincronização
             if (count < 5) {
                 try {
-                    System.out.println("Conectando a ... " + serverName + " na porta " + serverPort);
+                    System.out.println("--------------------------------------------");
+                    System.out.println("Conectando a ... " + nomeServidor + " na porta " + portaServidor);
 
                     //Conecta ao servidor
-                    Socket client = new Socket(serverName, serverPort);
-                    System.out.println("Conectado a " + client.getRemoteSocketAddress());
+                    Socket cliente = new Socket(nomeServidor, portaServidor);
+                    System.out.println("Conectado a " + cliente.getRemoteSocketAddress());
 
                     //Envia mensagem para o servidor
-                    OutputStream outToServer = client.getOutputStream();
+                    OutputStream outToServer = cliente.getOutputStream();
                     DataOutputStream out = new DataOutputStream(outToServer);
                     t0 = System.currentTimeMillis();
-                    out.writeUTF("Olá de " + client.getLocalSocketAddress());
+                    out.writeUTF("Olá de " + cliente.getLocalSocketAddress());
 
                     //Recebe mensagem do servidor
-                    InputStream inFromServer = client.getInputStream();
+                    InputStream inFromServer = cliente.getInputStream();
                     DataInputStream in = new DataInputStream(inFromServer);
                     long t1 = in.readLong();   //Recebe o tempo total no servidor
                     long t2 = in.readLong();   //Recebe o tempo de envio no servidor
                     t3 = System.currentTimeMillis();
 
                     //Fecha a conexão
-                    client.close();
+                    cliente.close();
 
                     count ++;
 
@@ -97,13 +99,35 @@ public class ClientCristian {
                     pr.println("*** Horario de Cristian ***");
                     pr.println("Horario de Cristian -> t2 + (rtt/2): " + cristianTime);
                     pr.println("Horario de Cristian -> t2 + (rtt_offset): " + cristianTimeComOffset);
+
+                    //Imprimindo no console
+                    System.out.println("\nTempo Cliente Envio: " + formataData(t0));
+                    System.out.println("Tempo do Servidor Recebimento: " + formataData(t1));
+                    System.out.println("Tempo do Servidor Envio: " + formataData(t2));
+                    System.out.println("Tempo Cliente Recebimento: " + formataData(t3));
+
+                    /*
+                    System.out.println("*** RTT ***");
+                    System.out.println("a -> (t3 - t0) = " + (t3 - t0));
+                    System.out.println("b -> (t2 - t1) = " + (t2 - t1));
+
+                    System.out.println("*** RTT divido por 2 ***");
+                    System.out.println("(a-b)/2 =  " + rtt / 2);
+
+                    System.out.println("*** RTT Offset ***");
+                    System.out.println("Theta -> (t1 - t0) + (t2 - t3 ) / 2 = " + theta);
+
+                    System.out.println("*** Horario de Cristian ***");*/
+
+                    System.out.println("Horario de Cristian -> t2 + (rtt/2): " + formataData(cristianTime));
+                    System.out.println("Horario de Cristian -> t2 + (rtt_offset): " + formataData(cristianTimeComOffset));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 pr.close(); //Libera o arquivo
-                timer.cancel();
-                timer.purge();
+                temporizador.cancel();
+                temporizador.purge();
             }
         }
     }
@@ -111,20 +135,30 @@ public class ClientCristian {
     public static void main(String [] args) {
 
         //Nome do servidor
-        String serverName = "localhost";
+        String nomeServidor = "Localhost";
 
         //Porta do servidor
-        int serverPort = 9092;
+        int portaServidor = 9092;
 
         //Cria um cliente que vai conecar no servidor
-        ClientCristian client = new ClientCristian(serverName, serverPort);
+        Cliente cliente = new Cliente(nomeServidor, portaServidor);
 
         //Tempo que o objeto Timer vai fazer as conexoes
-        long period = 6000;
+        long periodo = 6000;
 
         //Instancia a classe Conversation
-        ClientCristian.Conversation  conversation = client.new Conversation();
+        Cliente.Conversation  conversation = cliente.new Conversation();
 
-        client.timer.schedule(conversation, 0, period);
+        cliente.temporizador.schedule(conversation, 0, periodo);
+    }
+
+    public String formataData(long data) {
+        Timestamp timeStamp = new Timestamp(data);
+        Date date = new Date(timeStamp.getTime());
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS");
+        String dataFormatada = formato.format(date);
+
+        return dataFormatada;
     }
 }

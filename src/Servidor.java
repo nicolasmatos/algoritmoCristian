@@ -1,5 +1,3 @@
-package server;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,14 +5,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class ServerCristian extends Thread {
+public class Servidor extends Thread {
 
-    private final ServerSocket serverSocket;
-    private long timeRecv;  //O tempo em receber mensagem do cliente
-    private long timeSend;  //O momento em que envia mensagem ao cliente
+    private final ServerSocket servidorSocket;
+    private long tempoRecv;  //O tempo em receber mensagem do cliente
+    private long tempoEnvio;  //O momento em que envia mensagem ao cliente
 
-    public ServerCristian(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
+    public Servidor(int port) throws IOException {
+        servidorSocket = new ServerSocket(port);
     }
 
     @Override
@@ -22,27 +20,27 @@ public class ServerCristian extends Thread {
         while (true) {
             try {
                 //Saída do nome do servidor
-                String localHostName = java.net.InetAddress.getLocalHost().getHostName();
-                System.out.println("Nome do Servidor: " + localHostName);
+                String nomeHost = java.net.InetAddress.getLocalHost().getHostName();
+                System.out.println("--------------------------------------------");
+                System.out.println("Nome do Servidor: " + nomeHost);
 
-                System.out.println("Esperado cliente na porta " +
-                        serverSocket.getLocalPort() + "...");
+                System.out.println("Esperado cliente na porta " + servidorSocket.getLocalPort() + "...");
 
                 //Aceite uma conexão de clientes
-                Socket server = serverSocket.accept();
+                Socket server = servidorSocket.accept();
                 System.out.println("Conectado em: " + server.getRemoteSocketAddress());
 
                 //Receber mensagem de clientes
                 DataInputStream in = new DataInputStream(server.getInputStream());
-                timeRecv = System.currentTimeMillis();
+                tempoRecv = System.currentTimeMillis();
                 System.out.println(in.readUTF());
 
                 //Enviar mensagem de volta aos clientes
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                long time_on_server = System.currentTimeMillis();
-                timeSend = System.currentTimeMillis();
-                out.writeLong(time_on_server);  //Envia o tempo total no servidor de volta ao cliente
-                out.writeLong(timeSend);        //Envia o tempo de envio para o cliente
+                long tempoServidor = System.currentTimeMillis();
+                tempoEnvio = System.currentTimeMillis();
+                out.writeLong(tempoServidor);  //Envia o tempo total no servidor de volta ao cliente
+                out.writeLong(tempoEnvio);     //Envia o tempo de envio para o cliente
 
                 //Fecha a conexão
                 server.close();
@@ -57,9 +55,9 @@ public class ServerCristian extends Thread {
     }
 
     public static void main(String [] args) {
-        int port = 9092;
+        int porta = 9092;
         try {
-            Thread t = new ServerCristian(port);
+            Thread t = new Servidor(porta);
             t.start();
         } catch (IOException e) {
             e.printStackTrace();
